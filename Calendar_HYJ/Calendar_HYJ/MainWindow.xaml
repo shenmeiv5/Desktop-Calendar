@@ -1,12 +1,33 @@
-﻿<Window x:Class="Calendar_HYJ.MainWindow"
+﻿    <!--
+    **********************************
+    创建时间：2018/10/03
+    创建人：HYJ
+    文件说明：界面主窗口
+    **********************************
+    -->
+    <Window x:Class="Calendar_HYJ.MainWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Calendar_HYJ"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
-    <Grid>
-        
+        Title="Calendar" Height="360" Width="350">
+    <Grid ShowGridLines="True">
+        <!--主网格-->
+        <Grid.RowDefinitions>
+            <RowDefinition Height="10"/>
+            <RowDefinition/>
+            <RowDefinition Height="240"/>
+            <RowDefinition Height="10"/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition/>
+            <ColumnDefinition Width="315"/>
+            <ColumnDefinition/>
+        </Grid.ColumnDefinitions>
+
+        <!--主要区域-->
+        <WrapPanel x:Name="wpMainRegion" Grid.Row="2" Grid.Column="1" />
     </Grid>
 </Window>
