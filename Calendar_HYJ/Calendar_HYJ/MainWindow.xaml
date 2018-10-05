@@ -26,8 +26,12 @@
             <ColumnDefinition Width="315"/>
             <ColumnDefinition/>
         </Grid.ColumnDefinitions>
-
+        
         <!--主要区域-->
-        <WrapPanel x:Name="wpMainRegion" Grid.Row="2" Grid.Column="1" />
+        <WrapPanel x:Name="wpMainRegion" Grid.Row="2" Grid.Column="1" HorizontalAlignment="Left" VerticalAlignment="Top"
+                   Background="DimGray">
+
+        </WrapPanel>
+        <Button Content="sss" Grid.Column="1" Grid.Row="1" />
     </Grid>
 </Window>

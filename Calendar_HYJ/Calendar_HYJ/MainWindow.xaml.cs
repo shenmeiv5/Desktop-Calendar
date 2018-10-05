@@ -20,9 +20,44 @@ namespace Calendar_HYJ
     /// </summary>
     public partial class MainWindow : Window
     {
+        CalendarData cd = new CalendarData();
         public MainWindow()
         {
             InitializeComponent();
+
+            InitialTest();
+        }
+
+        private void InitialTest()
+        {
+            List<DayData> days = new List<DayData>();
+            for (int i = 0; i < 42; i++)
+            {
+                DayData d = new DayData();
+                d.SolarDay = i+1;
+                d.LunarDay = i;
+                days.Add(d);
+            }
+            cd.SelDays.AddRange(days);
+
+            wpMainRegion.DataContext = cd.SelDays;
+
+            TextBlock tb = new TextBlock();
+            
+
+            Style dayStyle = (Style)this.FindResource("Day_WrapTemplate");
+            wpMainRegion.Style = dayStyle;
+            Style btDayTemplate = (Style)this.FindResource("Day_ButtonTemplate");
+            for (int i = 0; i < 42; i++)
+            {
+                
+                Button bt = new Button();
+                
+                bt.Style = btDayTemplate;
+                bt.DataContext = cd.SelDays[i];
+                wpMainRegion.Children.Add(bt);
+            }
+
         }
     }
 }

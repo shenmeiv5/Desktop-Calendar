@@ -1,0 +1,15 @@
+﻿    <!--
+    ************************
+    创建日期：2018/10/5
+    创建人：HYJ
+    文件描述：主区域WrapPanel的模板集合
+    ************************
+    -->
+<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:local="clr-namespace:Calendar_HYJ">
+    <!--日期Wrap模板-->
+    <Style x:Key="Day_WrapTemplate" BasedOn="{x:Null}" TargetType="WrapPanel">
+        
+    </Style>
+</ResourceDictionary>

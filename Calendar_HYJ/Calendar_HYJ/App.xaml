@@ -4,6 +4,11 @@
              xmlns:local="clr-namespace:Calendar_HYJ"
              StartupUri="MainWindow.xaml">
     <Application.Resources>
-         
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="ButtonTemplate.xaml"/>
+                <ResourceDictionary Source="WrapTemplate.xaml"/>
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
     </Application.Resources>
 </Application>
