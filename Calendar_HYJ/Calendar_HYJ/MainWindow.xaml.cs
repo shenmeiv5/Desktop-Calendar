@@ -28,6 +28,9 @@ namespace Calendar_HYJ
             InitialTest();
         }
 
+
+
+
         private void InitialTest()
         {
             List<DayData> days = new List<DayData>();
@@ -44,20 +47,32 @@ namespace Calendar_HYJ
 
             TextBlock tb = new TextBlock();
             
-
-            Style dayStyle = (Style)this.FindResource("Day_WrapTemplate");
-            wpMainRegion.Style = dayStyle;
             Style btDayTemplate = (Style)this.FindResource("Day_ButtonTemplate");
-            for (int i = 0; i < 42; i++)
+            Style tbDayTemplate = (Style)this.FindResource("Day_TextBlockTemplate");
+            for (int i = 0; i < 7; i++)
+            {
+                Button bt = new Button();
+                bt.Style = tbDayTemplate;
+                bt.DataContext = i.ToString();
+                
+                //wpMainRegion.Children.Add(bt);
+            }
+            for (int i = 0; i < 35; i++)
             {
                 
                 Button bt = new Button();
                 
                 bt.Style = btDayTemplate;
                 bt.DataContext = cd.SelDays[i];
+                //wpMainRegion.Children.Add(bt);
+            }
+            for (int i = 0; i < 12; i++)
+            {
+                Button bt = new Button();
+                bt.Style = (Style)this.FindResource("MonthYear_ButtonTemplate");
+                bt.DataContext = i.ToString();
                 wpMainRegion.Children.Add(bt);
             }
-
         }
     }
 }

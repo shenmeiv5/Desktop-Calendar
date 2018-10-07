@@ -11,23 +11,87 @@
     <!--日期Button模板-->
     <Style x:Key="Day_ButtonTemplate" BasedOn="{x:Null}" TargetType="{x:Type Button}">
         <Setter Property="Background" Value="DimGray"/>
-        <Setter Property="BorderBrush" Value="DimGray"/>
+        <Setter Property="BorderBrush" Value="LightGray"/>
         <Setter Property="BorderThickness" Value="2"/>
         <Setter Property="Height" Value="38.5"/>
         <Setter Property="Width" Value="43.5"/>
         <Setter Property="Margin" Value="0.75"/>
+        <Setter Property="FontFamily" Value="微软雅黑"/>
+        <Setter Property="FontSize" Value="12"/>
         <Setter Property="Foreground" Value="White"/>
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="{x:Type Button}">
-                    <Border BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}">
-                        <Grid Background="{TemplateBinding Background}">
+                    <Border BorderBrush="{TemplateBinding BorderBrush}"
+                            BorderThickness="{TemplateBinding BorderThickness}"
+                            Background="{TemplateBinding Background}"
+                            CornerRadius="3">
+                        <Grid>
                             <Grid.RowDefinitions>
                                 <RowDefinition/>
                                 <RowDefinition/>
                             </Grid.RowDefinitions>
                             <TextBlock Grid.Row="0" Text="{Binding SolarDay}" HorizontalAlignment="Center" VerticalAlignment="Bottom"/>
                             <TextBlock Grid.Row="1" Text="{Binding LunarDay}" HorizontalAlignment="Center" VerticalAlignment="Top"/>
+                        </Grid>
+                    </Border>
+                    <!--触发器-->
+                    <ControlTemplate.Triggers>
+                        <!--鼠标滑过，边框变成浅灰色-->
+                        <MultiTrigger>
+                            <MultiTrigger.Conditions>
+                                <Condition Property="IsMouseOver" Value="True"/>
+                            </MultiTrigger.Conditions>
+                            <Setter Property="BorderBrush" Value="DimGray"/>
+                            <Setter Property="Background" Value="LightGray"/>
+                            <Setter Property="Foreground" Value="Black"/>
+                        </MultiTrigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <!--日期TextBlock模板-->
+    <Style x:Key="Day_TextBlockTemplate" BasedOn="{x:Null}" TargetType="{x:Type Button}">
+        <Setter Property="Background" Value="DimGray"/>
+        <Setter Property="Height" Value="38.5"/>
+        <Setter Property="Width" Value="43.5"/>
+        <Setter Property="Margin" Value="0.75"/>
+        <Setter Property="FontFamily" Value="微软雅黑"/>
+        <Setter Property="FontSize" Value="16"/>
+        <Setter Property="Foreground" Value="White"/>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type Button}">
+                    <Grid Height="{TemplateBinding Height}" Width="{TemplateBinding Width}">
+                        <TextBlock Text="{Binding .}" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                    </Grid>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+    
+    <!--年月Button模板-->
+    <Style x:Key="MonthYear_ButtonTemplate" BasedOn="{x:Null}" TargetType="{x:Type Button}">
+        <Setter Property="Background" Value="DimGray"/>
+        <Setter Property="BorderBrush" Value="DimGray"/>
+        <Setter Property="BorderThickness" Value="2"/>
+        <Setter Property="Height" Value="78.5"/>
+        <Setter Property="Width" Value="77.25"/>
+        <Setter Property="Margin" Value="0.75"/>
+        <Setter Property="FontFamily" Value="微软雅黑"/>
+        <Setter Property="FontSize" Value="18"/>
+        <Setter Property="Foreground" Value="White"/>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type Button}">
+                    <Border BorderBrush="{TemplateBinding BorderBrush}"
+                            BorderThickness="{TemplateBinding BorderThickness}"
+                            Background="{TemplateBinding Background}"
+                            CornerRadius="3">
+                        <Grid>
+                            <TextBlock Text="{Binding .}" HorizontalAlignment="Center" VerticalAlignment="Center"/>
                         </Grid>
                     </Border>
                     <!--触发器-->
@@ -44,6 +108,4 @@
             </Setter.Value>
         </Setter>
     </Style>
-    
-    
 </ResourceDictionary>

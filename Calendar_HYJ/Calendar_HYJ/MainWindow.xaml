@@ -18,6 +18,7 @@
         <Grid.RowDefinitions>
             <RowDefinition Height="10"/>
             <RowDefinition/>
+            <RowDefinition/>
             <RowDefinition Height="240"/>
             <RowDefinition Height="10"/>
         </Grid.RowDefinitions>
@@ -29,9 +30,6 @@
         
         <!--主要区域-->
         <WrapPanel x:Name="wpMainRegion" Grid.Row="2" Grid.Column="1" HorizontalAlignment="Left" VerticalAlignment="Top"
-                   Background="DimGray">
-
-        </WrapPanel>
-        <Button Content="sss" Grid.Column="1" Grid.Row="1" />
+                   Background="DimGray"/>
     </Grid>
 </Window>
