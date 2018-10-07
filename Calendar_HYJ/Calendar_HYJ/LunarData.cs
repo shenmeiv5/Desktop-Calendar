@@ -21,7 +21,7 @@ namespace Calendar_HYJ
         ///第1-4位:   闰月月份 1-12，没有为0
         ///第5-16位: 月份天数，16位为1月，1为30天，0位29天
         ///第17位：  闰月天数，1位30天,0位28天
-        static public long[] lunarInfo = {//农历数据来源于香港天文台（地址：https://data.weather.gov.hk/gts/time/conversion1_text_c.htm）
+        static public long[] lunarInfo = {   //农历数据来源于香港天文台（地址：https://data.weather.gov.hk/gts/time/conversion1_text_c.htm）
             0x04bd8, 0x04ae0, 0x0a570, 0x054d5, 0x0d260, 0x0d950, 0x16554, 0x056a0, 0x09ad0, 0x055d2,//1900-1909
             0x04ae0, 0x0a5b6, 0x0a4d0, 0x0d250, 0x1d255, 0x0b540, 0x0d6a0, 0x0ada2, 0x095b0, 0x14977,//1910-1919
             0x04970, 0x0a4b0, 0x0b4b5, 0x06a50, 0x06d40, 0x1ab54, 0x02b60, 0x09570, 0x052f2, 0x04970,//1920-1929
@@ -42,7 +42,20 @@ namespace Calendar_HYJ
             0x052d0, 0x0a9b8, 0x0a950, 0x0b4a0, 0x0b6a6, 0x0ad50, 0x055a0, 0x0aba4, 0x0a5b0, 0x052b0,//2070-2079
             0x0b273, 0x06930, 0x07337, 0x06aa0, 0x0ad50, 0x14b55, 0x04b60, 0x0a570, 0x054e4, 0x0d160,//2080-2089
             0x0e968, 0x0d520, 0x0daa0, 0x16aa6, 0x056d0, 0x04ae0, 0x0a9d4, 0x0a2d0, 0x0d150, 0x0f252,//2090-2099
-            0x0d520 };//2100
+            0x0d520//2100
+        };
+        /// <summary>
+        /// 农历月份Str数据
+        /// </summary>
+        static public string[] lunarMonthStrInfo = {
+            "", "正月", "二月", "三月", "四月", "五月", "六月", "七月", "八月", "九月", "十月", "十一月", "腊月"
+        };
+        static public string[] lunarDayStrInfo = {
+            "",
+            "初一", "初二", "初三", "初四", "初五", "初六", "初七", "初八", "初九", "初十",//1-10
+            "十一", "十二", "十三", "十四", "十五", "十六", "十七", "十八", "十九", "二十",//11-20
+            "廿一", "廿二", "廿三", "廿四", "廿五", "廿六", "廿七", "廿八", "廿九", "三十",//21-30
+        };
         /// <summary>
         /// 农历y年闰哪个月 1-12 没有为0
         /// </summary>
@@ -103,7 +116,7 @@ namespace Calendar_HYJ
             //目标公历日期
             DateTime targetDate = new DateTime(y, m, d);
             TimeSpan ts = targetDate - baseDate;
-            int totalDays = ts.Days;
+            int totalDays = ts.Days +1 ;
             //农历数据 年0 月1 日2 闰3（1闰，0不闰
             int[] lDate = new int[4];
             for(int i=1900; i<2101 && totalDays>0; i++)

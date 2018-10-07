@@ -20,17 +20,39 @@ namespace Calendar_HYJ
     /// </summary>
     public partial class MainWindow : Window
     {
-        CalendarData cd = new CalendarData();
+        CalendarData cd = new CalendarData(DateTime.Today.Year, DateTime.Today.Month);
         public MainWindow()
         {
             InitializeComponent();
+            this.btYearMonthTool.DataContext = cd.SelYear.ToString() + "年" + cd.SelMonth.ToString() + "月"; 
+            InitialMainRegion();
+            //InitialTest();
+        }
+        private void InitialMainRegion()
+        {
+            this.wpMainRegion.DataContext = cd;
+            Style btDayTemplate = (Style)this.FindResource("Day_ButtonTemplate");
+            Style tbDayTemplate = (Style)this.FindResource("Day_TextBlockTemplate");
+            for (int i = 0; i < 7; i++)
+            {
+                Button bt = new Button();
+                bt.Style = tbDayTemplate;
+                bt.DataContext = (i+1).ToString();
 
-            InitialTest();
+                wpMainRegion.Children.Add(bt);
+            }
+            for (int i = 0; i < 35; i++)
+            {
+                Button bt = new Button();
+                bt.Style = btDayTemplate;
+                bt.DataContext = cd.SelDays[i];
+
+                wpMainRegion.Children.Add(bt);
+            }
         }
 
 
-
-
+        /*
         private void InitialTest()
         {
             List<DayData> days = new List<DayData>();
@@ -74,5 +96,6 @@ namespace Calendar_HYJ
                 wpMainRegion.Children.Add(bt);
             }
         }
+        */
     }
 }

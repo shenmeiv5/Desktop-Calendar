@@ -44,7 +44,8 @@ namespace Calendar_HYJ
                 if (PropertyChanged != null)
                 {
                     this.PropertyChanged.Invoke(this, new PropertyChangedEventArgs("selYear"));
-                    InitialSelDays();
+                    //this.SynchronizationSelYearMonth();
+                    //this.SynchronizationSelDays();
                 }
             }
         }
@@ -58,7 +59,7 @@ namespace Calendar_HYJ
                 if (PropertyChanged != null)
                 {
                     this.PropertyChanged.Invoke(this, new PropertyChangedEventArgs("selMonth"));
-                    InitialSelDays();
+                    this.SynchronizationSelDays();
                 }
             }
         }
@@ -66,20 +67,50 @@ namespace Calendar_HYJ
         /// <summary>
         /// 构造
         /// </summary>
-        public CalendarData()
+        public CalendarData(int y=1900, int m=1, int d=31)
         {
-            selDays = new List<DayData>();
-            for (int i = 0; i < 35; i++)
-            {
-                DayData d = new DayData();
-                selDays.Add(d);
-            }
-            InitialSelDays();
+            this.selYear = y;
+            this.selMonth = m;
+            InitialSelDays(y, m);
+            SynchronizationSelDays();
         }
         /// <summary>
         /// 初始化当前日期数据
         /// </summary>
-        private void InitialSelDays()
+        private void InitialSelDays(int y, int m)
+        {
+            this.selDays = new List<DayData>();
+            for (int i = 0; i < 35; i++)
+            {
+                DayData d = new DayData(y, m);
+                selDays.Add(d);
+            }
+        }
+        /// <summary>
+        /// 同步当前年月数据
+        /// </summary>
+        private void SynchronizationSelYearMonth(DayData d, int m)
+        {
+            if (m == 0)
+            {
+                d.SolarYear = this.selYear - 1;
+                d.SolarMonth = 12;
+            }
+            else if (m == 13)
+            {
+                d.SolarYear = this.selYear + 1;
+                d.SolarMonth = 1;
+            }
+            else
+            {
+                d.SolarYear = this.selYear;
+                d.SolarMonth = m;
+            }
+        }
+        /// <summary>
+        /// 同步当前日期数据
+        /// </summary>
+        private void SynchronizationSelDays()
         {
             //y年m月的第一日
             DateTime dt = new DateTime(this.selYear, this.selMonth, 1);
@@ -102,19 +133,22 @@ namespace Calendar_HYJ
             //当前月天数
             int nowDays = DateTime.DaysInMonth(this.selYear, this.selMonth);
             //上个月日期
-            for (int i = 0; i < dw; i++)
+            for (int i = 0; i < dw - 1; i++)
             {
+                SynchronizationSelYearMonth(this.SelDays[i], this.selMonth - 1);
                 this.SelDays[i].SolarDay = lastDays - i + dw +1;
             }
             //当前月日期
-            for (int i = dw; i < nowDays; i++)
+            for (int i = dw - 1; i < nowDays; i++)
             {
-                this.SelDays[i].SolarDay = i - dw + 1;
+                SynchronizationSelYearMonth(this.SelDays[i], this.selMonth);
+                this.SelDays[i].SolarDay = i - dw + 2;
             }
             //下个月日期
-            for (int i = dw + nowDays; i < 35; i++)
+            for (int i = dw + nowDays - 1; i < 35; i++)
             {
-                this.SelDays[i].SolarDay = i - dw - nowDays + 1;
+                SynchronizationSelYearMonth(this.SelDays[i], this.selMonth + 1);
+                this.SelDays[i].SolarDay = i - dw - nowDays + 2;
             }
         }//InitialSelDays 函数结束
     }

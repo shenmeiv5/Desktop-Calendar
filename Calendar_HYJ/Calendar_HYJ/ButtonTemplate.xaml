@@ -32,7 +32,7 @@
                                 <RowDefinition/>
                             </Grid.RowDefinitions>
                             <TextBlock Grid.Row="0" Text="{Binding SolarDay}" HorizontalAlignment="Center" VerticalAlignment="Bottom"/>
-                            <TextBlock Grid.Row="1" Text="{Binding LunarDay}" HorizontalAlignment="Center" VerticalAlignment="Top"/>
+                            <TextBlock Grid.Row="1" Text="{Binding LunarStrDay}" HorizontalAlignment="Center" VerticalAlignment="Top"/>
                         </Grid>
                     </Border>
                     <!--触发器-->
@@ -108,4 +108,29 @@
             </Setter.Value>
         </Setter>
     </Style>
+    
+    <!--年月工具栏TextBlock模板-->
+    <Style x:Key="YearMonthTool_TextBlockTemplate" BasedOn="{x:Null}" TargetType="{x:Type Button}">
+        <Setter Property="FontFamily" Value="微软雅黑"/>
+        <Setter Property="FontSize" Value="16"/>
+        <Setter Property="Foreground" Value="Gray"/>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type Button}">
+                    <Grid>
+                        <TextBlock Text="{Binding .}" VerticalAlignment="Center" FontSize="{TemplateBinding FontSize}"/>
+                    </Grid>
+                    <!--触发器-->
+                    <ControlTemplate.Triggers>
+                        <!--鼠标滑过，字体颜色变白-->
+                        <Trigger Property="IsMouseOver" Value="true">
+                            <Setter Property="Foreground" Value="White"/>
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+    
+    
 </ResourceDictionary>
