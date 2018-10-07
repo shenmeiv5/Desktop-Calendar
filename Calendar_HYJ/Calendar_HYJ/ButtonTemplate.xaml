@@ -11,13 +11,13 @@
     <!--日期Button模板-->
     <Style x:Key="Day_ButtonTemplate" BasedOn="{x:Null}" TargetType="{x:Type Button}">
         <Setter Property="Background" Value="DimGray"/>
-        <Setter Property="BorderBrush" Value="LightGray"/>
+        <Setter Property="BorderBrush" Value="DimGray"/>
         <Setter Property="BorderThickness" Value="2"/>
         <Setter Property="Height" Value="38.5"/>
         <Setter Property="Width" Value="43.5"/>
         <Setter Property="Margin" Value="0.75"/>
         <Setter Property="FontFamily" Value="微软雅黑"/>
-        <Setter Property="FontSize" Value="12"/>
+        <Setter Property="FontSize" Value="13"/>
         <Setter Property="Foreground" Value="White"/>
         <Setter Property="Template">
             <Setter.Value>
@@ -42,9 +42,8 @@
                             <MultiTrigger.Conditions>
                                 <Condition Property="IsMouseOver" Value="True"/>
                             </MultiTrigger.Conditions>
-                            <Setter Property="BorderBrush" Value="DimGray"/>
-                            <Setter Property="Background" Value="LightGray"/>
-                            <Setter Property="Foreground" Value="Black"/>
+                            <Setter Property="BorderBrush" Value="LightGray"/>
+                            <Setter Property="Background" Value="Gray"/>
                             <Setter Property="FontWeight" Value="Bold"/>
                         </MultiTrigger>
                     </ControlTemplate.Triggers>

@@ -35,7 +35,7 @@ namespace Calendar_HYJ
 
             this.btYearMonthTool.DataContext = cd; 
             InitialMainRegion();
-            //InitialTest();
+
         }
 
         public void ShowTimer(object sender, EventArgs e)
@@ -61,6 +61,7 @@ namespace Calendar_HYJ
             {
                 Button bt = new Button();
                 bt.Style = tbDayTemplate;
+                
                 bt.DataContext = (i + 1).ToString();
 
                 wpMainRegion.Children.Add(bt);
@@ -69,6 +70,16 @@ namespace Calendar_HYJ
             {
                 Button bt = new Button();
                 bt.Style = btDayTemplate;
+                if (cd.SelDays[i].SolarMonth != cd.SelMonth)
+                {
+                    Color color = (Color)ColorConverter.ConvertFromString("DarkGray");
+                    bt.Foreground = new SolidColorBrush(color);
+                }
+                if (cd.SelDays[i].SolarMonth == DateTime.Now.Month && cd.SelDays[i].SolarDay == DateTime.Now.Day)
+                {
+                    Color color = (Color)ColorConverter.ConvertFromString("CornflowerBlue");
+                    bt.Background = new SolidColorBrush(color);
+                }
                 bt.DataContext = cd.SelDays[i];
 
                 wpMainRegion.Children.Add(bt);
@@ -100,6 +111,8 @@ namespace Calendar_HYJ
             {
                 cd.SelMonth -= 1;
             }
+            wpMainRegion.Children.Clear();
+            SetDayMainRegion();
         }
         /// <summary>
         /// 下个月
@@ -115,6 +128,8 @@ namespace Calendar_HYJ
             {
                 cd.SelMonth += 1;
             }
+            wpMainRegion.Children.Clear();
+            SetDayMainRegion();
         }
         /// <summary>
         /// 更改选择年月_(只实现了更改月

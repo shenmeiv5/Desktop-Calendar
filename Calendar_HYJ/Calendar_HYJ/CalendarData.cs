@@ -58,8 +58,6 @@ namespace Calendar_HYJ
                 {
                     this.PropertyChanged.Invoke(this, new PropertyChangedEventArgs("selYear"));
                     this.SelYearToStr();
-                    //this.SynchronizationSelYearMonth();
-                    //this.SynchronizationSelDays();
                 }
             }
         }
