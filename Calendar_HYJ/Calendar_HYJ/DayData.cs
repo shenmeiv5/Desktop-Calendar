@@ -63,6 +63,11 @@ namespace Calendar_HYJ
             {
                 solarDay = value;
                 SolarDayToLunarDay();
+                //激发事件
+                if (PropertyChanged != null)
+                {
+                    this.PropertyChanged.Invoke(this, new PropertyChangedEventArgs("solarDay"));
+                }
             }
         }
         public int LunarYear { get => lunarYear; set => lunarYear = value; }

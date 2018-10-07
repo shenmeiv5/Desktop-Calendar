@@ -31,6 +31,18 @@ namespace Calendar_HYJ
         /// </summary>
         private List<DayData> selDays;
         /// <summary>
+        /// 当前年字符串数据
+        /// </summary>
+        private string selStrYear;
+        /// <summary>
+        /// 当前月字符串数据
+        /// </summary>
+        private string selStrMonth;
+        /// <summary>
+        /// 当前年月字符串数据
+        /// </summary>
+        private string selStrYearMonth;
+        /// <summary>
         /// 属性改变事件
         /// </summary>
         public event PropertyChangedEventHandler PropertyChanged;
@@ -40,10 +52,12 @@ namespace Calendar_HYJ
             set
             {
                 selYear = value;
+                this.SelYearToStr();
                 //激发事件
                 if (PropertyChanged != null)
                 {
                     this.PropertyChanged.Invoke(this, new PropertyChangedEventArgs("selYear"));
+                    this.SelYearToStr();
                     //this.SynchronizationSelYearMonth();
                     //this.SynchronizationSelDays();
                 }
@@ -55,15 +69,43 @@ namespace Calendar_HYJ
             set
             {
                 selMonth = value;
-                //激发事件
-                if (PropertyChanged != null)
-                {
-                    this.PropertyChanged.Invoke(this, new PropertyChangedEventArgs("selMonth"));
-                    this.SynchronizationSelDays();
-                }
+
+                this.SelMonthToStr();
+                this.SynchronizationSelDays();               
             }
         }
         internal List<DayData> SelDays { get => selDays; set => selDays = value; }
+        public string SelStrYear
+        {
+            get => selStrYear;
+            set
+            {
+                selStrYear = value;
+                this.StrYearAndMonth();
+            }
+        }
+        public string SelStrMonth
+        {
+            get => selStrMonth;
+            set
+            {
+                selStrMonth = value;
+                this.StrYearAndMonth();
+            }
+        }
+        public string SelStrYearMonth
+        {
+            get => selStrYearMonth;
+            set
+            {
+                selStrYearMonth = value;
+                if (PropertyChanged != null)
+                {
+                    this.PropertyChanged.Invoke(this, new PropertyChangedEventArgs("selStrYearMonth"));
+                }
+            }
+        }
+
         /// <summary>
         /// 构造
         /// </summary>
@@ -71,6 +113,8 @@ namespace Calendar_HYJ
         {
             this.selYear = y;
             this.selMonth = m;
+            SelYearToStr();
+            SelMonthToStr();
             InitialSelDays(y, m);
             SynchronizationSelDays();
         }
@@ -80,7 +124,7 @@ namespace Calendar_HYJ
         private void InitialSelDays(int y, int m)
         {
             this.selDays = new List<DayData>();
-            for (int i = 0; i < 35; i++)
+            for (int i = 0; i < 42; i++)
             {
                 DayData d = new DayData(y, m);
                 selDays.Add(d);
@@ -136,20 +180,32 @@ namespace Calendar_HYJ
             for (int i = 0; i < dw - 1; i++)
             {
                 SynchronizationSelYearMonth(this.SelDays[i], this.selMonth - 1);
-                this.SelDays[i].SolarDay = lastDays - i + dw +1;
+                this.SelDays[i].SolarDay = lastDays + i - dw +2;
             }
             //当前月日期
-            for (int i = dw - 1; i < nowDays; i++)
+            for (int i = dw - 1; i < dw + nowDays - 1; i++)
             {
                 SynchronizationSelYearMonth(this.SelDays[i], this.selMonth);
                 this.SelDays[i].SolarDay = i - dw + 2;
             }
             //下个月日期
-            for (int i = dw + nowDays - 1; i < 35; i++)
+            for (int i = dw + nowDays - 1; i < 42; i++)
             {
                 SynchronizationSelYearMonth(this.SelDays[i], this.selMonth + 1);
                 this.SelDays[i].SolarDay = i - dw - nowDays + 2;
             }
         }//InitialSelDays 函数结束
+        private void SelYearToStr()
+        {
+            this.SelStrYear = this.selYear.ToString() + "年";
+        }
+        private void SelMonthToStr()
+        {
+            this.SelStrMonth = this.selMonth.ToString() + "月";
+        }
+        private void StrYearAndMonth()
+        {
+            this.SelStrYearMonth = this.selStrYear + this.selStrMonth;
+        }
     }
 }

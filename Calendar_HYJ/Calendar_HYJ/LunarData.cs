@@ -159,7 +159,7 @@ namespace Calendar_HYJ
                 if (lDate[3] == 0)
                     totalDays += MonthDays(lDate[0], lDate[1]);
                 else
-                    totalDays += LeapMonth(lDate[0]);
+                    totalDays += LeapMonthDays(lDate[0]);
             }
             lDate[2] = totalDays;
 

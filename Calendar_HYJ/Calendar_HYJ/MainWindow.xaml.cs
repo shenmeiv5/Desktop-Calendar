@@ -12,6 +12,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using System.Windows.Threading;
 
 namespace Calendar_HYJ
 {
@@ -21,13 +22,28 @@ namespace Calendar_HYJ
     public partial class MainWindow : Window
     {
         CalendarData cd = new CalendarData(DateTime.Today.Year, DateTime.Today.Month);
+        private DispatcherTimer showTimer;
         public MainWindow()
         {
             InitializeComponent();
-            this.btYearMonthTool.DataContext = cd.SelYear.ToString() + "年" + cd.SelMonth.ToString() + "月"; 
+
+            showTimer = new DispatcherTimer();
+            showTimer.Tick += new EventHandler(ShowTimer);
+            showTimer.Interval = new TimeSpan(0, 0, 0, 1);
+            showTimer.Start();
+
+            this.btYearMonthTool.DataContext = cd; 
             InitialMainRegion();
             //InitialTest();
         }
+
+        public void ShowTimer(object sender, EventArgs e)
+        {
+            this.Timer.Text = DateTime.Now.ToString();
+        }
+        /// <summary>
+        /// 初始化主要区域
+        /// </summary>
         private void InitialMainRegion()
         {
             this.wpMainRegion.DataContext = cd;
@@ -41,61 +57,44 @@ namespace Calendar_HYJ
 
                 wpMainRegion.Children.Add(bt);
             }
-            for (int i = 0; i < 35; i++)
-            {
-                Button bt = new Button();
-                bt.Style = btDayTemplate;
-                bt.DataContext = cd.SelDays[i];
-
-                wpMainRegion.Children.Add(bt);
-            }
-        }
-
-
-        /*
-        private void InitialTest()
-        {
-            List<DayData> days = new List<DayData>();
             for (int i = 0; i < 42; i++)
             {
-                DayData d = new DayData();
-                d.SolarDay = i+1;
-                d.LunarDay = i;
-                days.Add(d);
-            }
-            cd.SelDays.AddRange(days);
-
-            wpMainRegion.DataContext = cd.SelDays;
-
-            TextBlock tb = new TextBlock();
-            
-            Style btDayTemplate = (Style)this.FindResource("Day_ButtonTemplate");
-            Style tbDayTemplate = (Style)this.FindResource("Day_TextBlockTemplate");
-            for (int i = 0; i < 7; i++)
-            {
                 Button bt = new Button();
-                bt.Style = tbDayTemplate;
-                bt.DataContext = i.ToString();
-                
-                //wpMainRegion.Children.Add(bt);
-            }
-            for (int i = 0; i < 35; i++)
-            {
-                
-                Button bt = new Button();
-                
                 bt.Style = btDayTemplate;
                 bt.DataContext = cd.SelDays[i];
-                //wpMainRegion.Children.Add(bt);
-            }
-            for (int i = 0; i < 12; i++)
-            {
-                Button bt = new Button();
-                bt.Style = (Style)this.FindResource("MonthYear_ButtonTemplate");
-                bt.DataContext = i.ToString();
+
                 wpMainRegion.Children.Add(bt);
             }
         }
-        */
+        /// <summary>
+        /// 上个月
+        /// </summary>
+        private void btLastMonth_Click(object sender, RoutedEventArgs e)
+        {
+            if (cd.SelMonth == 1)
+            {
+                cd.SelYear -= 1;
+                cd.SelMonth = 12;
+            }
+            else
+            {
+                cd.SelMonth -= 1;
+            }
+        }
+        /// <summary>
+        /// 下个月
+        /// </summary>
+        private void btNextMonth_Click(object sender, RoutedEventArgs e)
+        {
+            if (cd.SelMonth == 12)
+            {
+                cd.SelYear += 1;
+                cd.SelMonth = 1;
+            }
+            else
+            {
+                cd.SelMonth += 1;
+            }
+        }
     }
 }

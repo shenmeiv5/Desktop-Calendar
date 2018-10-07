@@ -12,14 +12,14 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Calendar_HYJ"
         mc:Ignorable="d"
-        Title="Calendar" Height="360" Width="350">
+        Title="Calendar" Height="400" Width="350">
     <Grid ShowGridLines="True">
         <!--主网格-->
         <Grid.RowDefinitions>
             <RowDefinition Height="10"/>
             <RowDefinition/>
             <RowDefinition Height="50"/>
-            <RowDefinition Height="240"/>
+            <RowDefinition Height="280"/>
             <RowDefinition Height="10"/>
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
@@ -27,17 +27,18 @@
             <ColumnDefinition Width="315"/>
             <ColumnDefinition/>
         </Grid.ColumnDefinitions>
+        <TextBlock x:Name="Timer" Grid.Row="1" Grid.Column="1"/>
         <!--日期工具栏-->
         <Grid x:Name="gdToolRegion" Grid.Row="2" Grid.Column="1" Background="DimGray">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="Auto"/>
                 <ColumnDefinition/>
-                <ColumnDefinition Width="50"/>
-                <ColumnDefinition Width="50"/>
+                <ColumnDefinition Width="40"/>
+                <ColumnDefinition Width="40"/>
             </Grid.ColumnDefinitions>
-            <Button x:Name="btYearMonthTool" Grid.Column="0" Style="{DynamicResource YearMonthTool_TextBlockTemplate}"/>
-            <Button DataContext="△" Grid.Column="2" Style="{StaticResource YearMonthTool_TextBlockTemplate}"/>
-            <Button DataContext="▽" Grid.Column="3" Style="{StaticResource YearMonthTool_TextBlockTemplate}"/>
+            <Button x:Name="btYearMonthTool" Grid.Column="0" Style="{StaticResource YearMonthTool_TextBlockTemplate}"/>
+            <Button DataContext="△" Grid.Column="2" Style="{StaticResource UpDwonTool_TextBlockTemplate}" Click="btLastMonth_Click"/>
+            <Button DataContext="▽" Grid.Column="3" Style="{StaticResource UpDwonTool_TextBlockTemplate}" Click="btNextMonth_Click"/>
         </Grid>
         <!--主要区域-->
         <WrapPanel x:Name="wpMainRegion" Grid.Row="3" Grid.Column="1" HorizontalAlignment="Left" VerticalAlignment="Top"
