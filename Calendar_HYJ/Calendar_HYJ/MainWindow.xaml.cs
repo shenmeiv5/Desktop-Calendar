@@ -22,6 +22,7 @@ namespace Calendar_HYJ
     public partial class MainWindow : Window
     {
         CalendarData cd = new CalendarData(DateTime.Today.Year, DateTime.Today.Month);
+        private bool toolFlag = false;
         private DispatcherTimer showTimer;
         public MainWindow()
         {
@@ -47,13 +48,20 @@ namespace Calendar_HYJ
         private void InitialMainRegion()
         {
             this.wpMainRegion.DataContext = cd;
+            SetDayMainRegion();
+        }
+        /// <summary>
+        /// 设置主要区域为日期模块
+        /// </summary>
+        private void SetDayMainRegion()
+        {
             Style btDayTemplate = (Style)this.FindResource("Day_ButtonTemplate");
             Style tbDayTemplate = (Style)this.FindResource("Day_TextBlockTemplate");
             for (int i = 0; i < 7; i++)
             {
                 Button bt = new Button();
                 bt.Style = tbDayTemplate;
-                bt.DataContext = (i+1).ToString();
+                bt.DataContext = (i + 1).ToString();
 
                 wpMainRegion.Children.Add(bt);
             }
@@ -63,6 +71,18 @@ namespace Calendar_HYJ
                 bt.Style = btDayTemplate;
                 bt.DataContext = cd.SelDays[i];
 
+                wpMainRegion.Children.Add(bt);
+            }
+        }
+        private void SetMonthMainregion()
+        {
+            Style btMonthTemplate = (Style)this.FindResource("MonthYear_ButtonTemplate");
+            for (int i=1;i<13;i++)
+            {
+                Button bt = new Button();
+                bt.Style = btMonthTemplate;
+                bt.Click += new RoutedEventHandler(btMonth_Click);//添加Click事件
+                bt.DataContext = i.ToString() + "月";
                 wpMainRegion.Children.Add(bt);
             }
         }
@@ -95,6 +115,33 @@ namespace Calendar_HYJ
             {
                 cd.SelMonth += 1;
             }
+        }
+        /// <summary>
+        /// 更改选择年月_(只实现了更改月
+        /// </summary>
+        private void btYearMonthTool_Click(object sender, RoutedEventArgs e)
+        {
+            this.toolFlag = !this.toolFlag;
+            if (this.toolFlag == true)
+            {
+                wpMainRegion.Children.Clear();
+                SetMonthMainregion();
+            }
+            else
+            {
+                wpMainRegion.Children.Clear();
+                SetDayMainRegion();
+            }
+        }
+        /// <summary>
+        /// 选择月
+        /// </summary>
+        private void btMonth_Click(object sender, RoutedEventArgs e)
+        {
+            Button bt = sender as Button;//捕获当前Button对象
+            this.cd.SelMonth = int.Parse(bt.DataContext.ToString().TrimEnd(new char[] { '月'}) );
+            wpMainRegion.Children.Clear();
+            SetDayMainRegion();
         }
     }
 }
