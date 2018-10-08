@@ -21,7 +21,7 @@ namespace Calendar_HYJ
     /// </summary>
     public partial class MainWindow : Window
     {
-        CalendarData cd = new CalendarData(DateTime.Today.Year, DateTime.Today.Month);
+        private CalendarData cd = new CalendarData(DateTime.Today.Year, DateTime.Today.Month);
         private bool toolFlag = false;
         private DispatcherTimer showTimer;
         public MainWindow()
@@ -96,6 +96,10 @@ namespace Calendar_HYJ
                 bt.DataContext = i.ToString() + "月";
                 wpMainRegion.Children.Add(bt);
             }
+        }
+        private bool IsToday(DayData d)
+        {
+            return false;
         }
         /// <summary>
         /// 上个月

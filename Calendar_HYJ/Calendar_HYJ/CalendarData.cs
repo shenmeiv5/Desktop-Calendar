@@ -19,27 +19,27 @@ namespace Calendar_HYJ
     class CalendarData:INotifyPropertyChanged
     {
         /// <summary>
-        /// 当前年数据
+        /// 当前选择年数据
         /// </summary>
         private int selYear;
         /// <summary>
-        /// 当前月数据
+        /// 当前选择月数据
         /// </summary>
         private int selMonth;
         /// <summary>
-        /// 当前日期数据
+        /// 当前选择日期数据
         /// </summary>
         private List<DayData> selDays;
         /// <summary>
-        /// 当前年字符串数据
+        /// 当前选择年字符串数据
         /// </summary>
         private string selStrYear;
         /// <summary>
-        /// 当前月字符串数据
+        /// 当前选择月字符串数据
         /// </summary>
         private string selStrMonth;
         /// <summary>
-        /// 当前年月字符串数据
+        /// 当前选择年月字符串数据
         /// </summary>
         private string selStrYearMonth;
         /// <summary>

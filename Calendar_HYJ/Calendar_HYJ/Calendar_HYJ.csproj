@@ -55,7 +55,12 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="WindowApplicationSettings.cs" />
     <Page Include="ButtonTemplate.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="FrontWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -69,6 +74,9 @@
     </Compile>
     <Compile Include="CalendarData.cs" />
     <Compile Include="DayData.cs" />
+    <Compile Include="FrontWindow.xaml.cs">
+      <DependentUpon>FrontWindow.xaml</DependentUpon>
+    </Compile>
     <Compile Include="LunarData.cs" />
     <Compile Include="MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>

@@ -12,7 +12,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Calendar_HYJ"
         mc:Ignorable="d"
-        Title="Calendar" Height="400" Width="350">
+        Title="Calendar" Height="440" Width="350">
     <Grid ShowGridLines="True">
         <!--主网格-->
         <Grid.RowDefinitions>
@@ -33,8 +33,8 @@
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="Auto"/>
                 <ColumnDefinition/>
-                <ColumnDefinition Width="40"/>
-                <ColumnDefinition Width="40"/>
+                <ColumnDefinition Width="45"/>
+                <ColumnDefinition Width="45"/>
             </Grid.ColumnDefinitions>
             <Button x:Name="btYearMonthTool" Grid.Column="0" Style="{StaticResource YearMonthTool_TextBlockTemplate}" Click="btYearMonthTool_Click"/>
             <Button DataContext="△" Grid.Column="2" Style="{StaticResource UpDwonTool_TextBlockTemplate}" Click="btLastMonth_Click"/>
