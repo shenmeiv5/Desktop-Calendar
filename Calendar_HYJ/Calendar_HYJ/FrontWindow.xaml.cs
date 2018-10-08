@@ -76,7 +76,7 @@ namespace Calendar_HYJ
         private void Window_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
             this.DragMove();
-            this.lastWinLocation.X = this.Left +250;
+            this.lastWinLocation.X = this.Left;
             this.lastWinLocation.Y = this.Top;
         }
         /// <summary>
