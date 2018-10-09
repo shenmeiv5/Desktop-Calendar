@@ -22,24 +22,26 @@ namespace Calendar_HYJ
     public partial class FrontWindow : Window
     {
         /// <summary>
+        /// 计时器
+        /// </summary>
+        private DispatcherTimer showTimer;
+        private System.Windows.Forms.NotifyIcon notifyIcon;
+        /// <summary>
         /// 窗口位置记录
         /// </summary>
         private Point lastWinLocation;
         /// <summary>
-        /// 计时器
-        /// </summary>
-        private DispatcherTimer showTimer;
-        /// <summary>
-        /// 窗口位置
+        /// config存储数据帮助类对象
         /// </summary>
         public WindowApplicationSettings settings = new WindowApplicationSettings(); 
         public FrontWindow()
         {
             InitializeComponent();
+            InitialNotifyIcon();
+            StartShowTimer();
             this.tbShowDay.Text = DateTime.Now.Day.ToString();
             this.Closing += new CancelEventHandler(Winodw_Closing);
             this.Loaded += new RoutedEventHandler(Window_Loaded);
-            
         }
         /// <summary>
         /// 启动定时器
@@ -55,6 +57,50 @@ namespace Calendar_HYJ
         public void ShowTimer(object sender, EventArgs e)
         {
             this.tbShowDay.Text = DateTime.Now.Day.ToString();
+        }
+        /// <summary>
+        /// 初始化NotifyIcon（托盘运行相关
+        /// </summary>
+        private void InitialNotifyIcon()
+        {
+            this.notifyIcon = new System.Windows.Forms.NotifyIcon();
+
+            this.notifyIcon.Text = "Calendar";
+            this.notifyIcon.Icon = new System.Drawing.Icon("G:/Git-Calendar/Calendar_HYJ/Calendar_HYJ/lcons/calendarTray.ico");
+            this.notifyIcon.Visible = true;
+            this.notifyIcon.BalloonTipText = "Calendar is working";
+            this.notifyIcon.ShowBalloonTip(2000);
+
+            //设置菜单
+            System.Windows.Forms.MenuItem showMenu = new System.Windows.Forms.MenuItem("Show");
+            showMenu.Click += new EventHandler(ShowMenu_Click);
+            System.Windows.Forms.MenuItem exitMenu = new System.Windows.Forms.MenuItem("Exit");
+            exitMenu.Click += new EventHandler(ExitMenu_Click);
+
+            //关联托盘控件
+            System.Windows.Forms.MenuItem[] menus = new System.Windows.Forms.MenuItem[] { showMenu, exitMenu };
+            this.notifyIcon.ContextMenu = new System.Windows.Forms.ContextMenu(menus);
+        }
+
+        /// <summary>
+        /// 展示菜单项
+        /// </summary>
+        private void ShowMenu_Click(object sender, EventArgs e)
+        {
+            MainWindow mw = new MainWindow();
+            this.Visibility = Visibility.Hidden;
+            mw.Left = this.Left - 250;
+            mw.Top = this.Top;
+            mw.ShowDialog();
+            this.Visibility = Visibility.Visible;
+        }
+
+        /// <summary>
+        /// 关闭菜单项
+        /// </summary>
+        private void ExitMenu_Click(object sender, EventArgs e)
+        {
+            this.Close();
         }
 
         private void Winodw_Closing(object sender, CancelEventArgs e)

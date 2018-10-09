@@ -184,6 +184,12 @@ namespace Calendar_HYJ
             wpMainRegion.Children.Clear();
             SetDayMainRegion();
         }
-        
+        /// <summary>
+        /// 窗体不为活动状态时
+        /// </summary>
+        private void Window_Deactivated(object sender, EventArgs e)
+        {
+            this.Close();
+        }
     }
 }

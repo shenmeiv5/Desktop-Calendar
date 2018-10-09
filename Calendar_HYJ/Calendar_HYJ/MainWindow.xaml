@@ -13,7 +13,9 @@
         xmlns:local="clr-namespace:Calendar_HYJ"
         mc:Ignorable="d"
         Title="Calendar" Height="560" Width="350" ResizeMode="NoResize"
-        >
+        WindowStyle="None" AllowsTransparency="False" AllowDrop="False"
+        Icon="lcons/calendar.ico"
+        Deactivated="Window_Deactivated">
     <Grid>
         <!--主网格-->
         <Grid.RowDefinitions>
