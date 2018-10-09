@@ -19,6 +19,10 @@ namespace Calendar_HYJ
     class CalendarData:INotifyPropertyChanged
     {
         /// <summary>
+        /// 现在日期
+        /// </summary>
+        private DayData nowDay;
+        /// <summary>
         /// 当前选择年数据
         /// </summary>
         private int selYear;
@@ -46,6 +50,8 @@ namespace Calendar_HYJ
         /// 属性改变事件
         /// </summary>
         public event PropertyChangedEventHandler PropertyChanged;
+
+        internal DayData NowDay { get => nowDay; set => nowDay = value; }
         public int SelYear
         {
             get => selYear;
@@ -109,6 +115,8 @@ namespace Calendar_HYJ
         /// </summary>
         public CalendarData(int y=1900, int m=1, int d=31)
         {
+            this.nowDay = new DayData(y, m);
+            this.nowDay.SolarDay = DateTime.Now.Day;
             this.selYear = y;
             this.selMonth = m;
             SelYearToStr();
@@ -193,11 +201,11 @@ namespace Calendar_HYJ
                 this.SelDays[i].SolarDay = i - dw - nowDays + 2;
             }
         }//InitialSelDays 函数结束
-        private void SelYearToStr()
+        public void SelYearToStr()
         {
             this.SelStrYear = this.selYear.ToString() + "年";
         }
-        private void SelMonthToStr()
+        public void SelMonthToStr()
         {
             this.SelStrMonth = this.selMonth.ToString() + "月";
         }

@@ -27,20 +27,41 @@ namespace Calendar_HYJ
         public MainWindow()
         {
             InitializeComponent();
-
-            showTimer = new DispatcherTimer();
-            showTimer.Tick += new EventHandler(ShowTimer);
-            showTimer.Interval = new TimeSpan(0, 0, 0, 1);
-            showTimer.Start();
-
+            this.Loaded += new RoutedEventHandler(Window_Loaded);
+            StartShowTimer();
             this.btYearMonthTool.DataContext = cd; 
             InitialMainRegion();
-
         }
-
+        /// <summary>
+        /// 启动定时器
+        /// </summary>
+        private void StartShowTimer()
+        {
+            showTimer = new DispatcherTimer();
+            showTimer.Tick += new EventHandler(ShowTimer);
+            showTimer.Interval = new TimeSpan(0, 0, 1);//间隔一秒
+            showTimer.Start();
+        }
         public void ShowTimer(object sender, EventArgs e)
         {
-            this.Timer.Text = DateTime.Now.ToString();
+            cd.NowDay.SolarYear = DateTime.Now.Year;
+            cd.NowDay.SolarMonth = DateTime.Now.Month;
+            cd.NowDay.SolarDay = DateTime.Now.Day;
+            string str = cd.NowDay.SolarYear.ToString() + "年" + cd.NowDay.SolarMonth.ToString() + "月"
+                + cd.NowDay.SolarDay.ToString() + "日  " + cd.NowDay.LunarStrMonth + cd.NowDay.LunarStrDay;
+            this.btDay.DataContext = str;
+            this.tbLunarDay.Text = "今日 " + cd.NowDay.LunarStrMonth + cd.NowDay.LunarStrDay;
+        }
+        /// <summary>
+        /// 窗口加载
+        /// </summary>
+        private void Window_Loaded(object sender, RoutedEventArgs e)
+        {
+            this.Background = new SolidColorBrush(Color.FromRgb(70, 70, 70));
+            string str = cd.NowDay.SolarYear.ToString() + "年" + cd.NowDay.SolarMonth.ToString() + "月"
+                + cd.NowDay.SolarDay.ToString() + "日  " + cd.NowDay.LunarStrMonth + cd.NowDay.LunarStrDay;
+            this.btDay.DataContext = str;
+            this.tbLunarDay.Text = "今日 " + cd.NowDay.LunarStrMonth + cd.NowDay.LunarStrDay;
         }
         /// <summary>
         /// 初始化主要区域
@@ -61,8 +82,7 @@ namespace Calendar_HYJ
             {
                 Button bt = new Button();
                 bt.Style = tbDayTemplate;
-                
-                bt.DataContext = (i + 1).ToString();
+                bt.DataContext = SolarData.weekOfDayStr[i+1];
 
                 wpMainRegion.Children.Add(bt);
             }
@@ -144,11 +164,13 @@ namespace Calendar_HYJ
             if (this.toolFlag == true)
             {
                 wpMainRegion.Children.Clear();
+                //cd.SelStrMonth = "";
                 SetMonthMainregion();
             }
             else
             {
                 wpMainRegion.Children.Clear();
+                //cd.SelMonthToStr();
                 SetDayMainRegion();
             }
         }

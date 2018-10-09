@@ -1,25 +1,26 @@
-﻿    <!--
+﻿<!--
     **********************************
     创建时间：2018/10/03
     创建人：HYJ
     文件说明：界面主窗口
     **********************************
     -->
-    <Window x:Class="Calendar_HYJ.MainWindow"
+<Window x:Class="Calendar_HYJ.MainWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Calendar_HYJ"
         mc:Ignorable="d"
-        Title="Calendar" Height="440" Width="350">
-    <Grid ShowGridLines="True">
+        Title="Calendar" Height="560" Width="350" ResizeMode="NoResize">
+    <Grid>
         <!--主网格-->
         <Grid.RowDefinitions>
             <RowDefinition Height="10"/>
-            <RowDefinition/>
+            <RowDefinition Height="60"/>
             <RowDefinition Height="50"/>
             <RowDefinition Height="280"/>
+            <RowDefinition Height="120"/>
             <RowDefinition Height="10"/>
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
@@ -27,21 +28,43 @@
             <ColumnDefinition Width="315"/>
             <ColumnDefinition/>
         </Grid.ColumnDefinitions>
-        <TextBlock x:Name="Timer" Grid.Row="1" Grid.Column="1"/>
+        <!--当前日期栏-->
+        <Button x:Name="btDay" Grid.Row="1" Grid.Column="1" Style="{StaticResource NowDay_ButtonTemplate}"/>
         <!--日期工具栏-->
-        <Grid x:Name="gdToolRegion" Grid.Row="2" Grid.Column="1" Background="DimGray">
+        <Grid x:Name="gdToolRegion" Grid.Row="2" Grid.Column="1">
             <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="20"/>
                 <ColumnDefinition Width="Auto"/>
                 <ColumnDefinition/>
                 <ColumnDefinition Width="45"/>
                 <ColumnDefinition Width="45"/>
             </Grid.ColumnDefinitions>
-            <Button x:Name="btYearMonthTool" Grid.Column="0" Style="{StaticResource YearMonthTool_TextBlockTemplate}" Click="btYearMonthTool_Click"/>
-            <Button DataContext="△" Grid.Column="2" Style="{StaticResource UpDwonTool_TextBlockTemplate}" Click="btLastMonth_Click"/>
-            <Button DataContext="▽" Grid.Column="3" Style="{StaticResource UpDwonTool_TextBlockTemplate}" Click="btNextMonth_Click"/>
+            <Button x:Name="btYearMonthTool" Grid.Column="1" Style="{StaticResource YearMonthTool_TextBlockTemplate}" Click="btYearMonthTool_Click"/>
+            <Button DataContext="△" Grid.Column="3" Style="{StaticResource UpDwonTool_TextBlockTemplate}" Click="btLastMonth_Click"/>
+            <Button DataContext="▽" Grid.Column="4" Style="{StaticResource UpDwonTool_TextBlockTemplate}" Click="btNextMonth_Click"/>
         </Grid>
         <!--主要区域-->
         <WrapPanel x:Name="wpMainRegion" Grid.Row="3" Grid.Column="1" HorizontalAlignment="Left" VerticalAlignment="Top"
                    Background="DimGray"/>
+        <!--记事本区域-->
+        <Grid Grid.Row="4" Grid.Column="1">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="40"/>
+                <RowDefinition/>
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition/>
+                <ColumnDefinition Width="40"/>
+            </Grid.ColumnDefinitions>
+            <Border BorderThickness="0, 2, 0, 0" BorderBrush="LightGray" Grid.Row="0" Grid.ColumnSpan="3" Margin="0, 5, 0, 0"/>
+            <Viewbox  Grid.Row="0" Grid.Column="0" Margin="5, 5, 0, 0">
+                    <TextBlock x:Name="tbLunarDay" Text="今天" FontFamily="微软雅黑" Foreground="White"/>
+            </Viewbox>
+            <TextBlock Grid.Row="0" Grid.Column="2" Text="+" FontWeight="Bold" FontSize="30" Foreground="Gray" 
+                       HorizontalAlignment="Center" VerticalAlignment="Center"/>
+            <TextBlock Grid.Row="1" Grid.ColumnSpan="3" Text="无事件" 
+                       FontFamily="微软雅黑" FontSize="16" Foreground="White" Margin="5, 5, 0, 0"/>
+        </Grid>
     </Grid>
 </Window>

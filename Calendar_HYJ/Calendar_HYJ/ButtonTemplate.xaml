@@ -155,4 +155,28 @@
             </Setter.Value>
         </Setter>
     </Style>
+    
+    <!--现在日期Button模板-->
+    <Style x:Key="NowDay_ButtonTemplate" BasedOn="{x:Null}" TargetType="{x:Type Button}">
+        <Setter Property="FontFamily" Value="微软雅黑"/>
+        <Setter Property="Foreground" Value="CornflowerBlue"/>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type Button}">
+                    <Viewbox>
+                        <Border BorderThickness="0,0,0,1" BorderBrush="LightGray">
+                        <TextBlock Text="{Binding .}" HorizontalAlignment="Center"/>
+                        </Border>
+                    </Viewbox>
+                    <!--触发器-->
+                    <ControlTemplate.Triggers>
+                        <!--鼠标滑过，字体颜色变白-->
+                        <Trigger Property="IsMouseOver" Value="true">
+                            <Setter Property="Foreground" Value="DimGray"/>
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
 </ResourceDictionary>

@@ -131,9 +131,12 @@ namespace Calendar_HYJ
             //闰月
             if (leap == 1)
             {
-                this.LunarStrMonth = "闰";
+                this.LunarStrMonth = "闰" + LunarData.lunarMonthStrInfo[this.lunarMonth];
             }
-            this.LunarStrMonth += LunarData.lunarMonthStrInfo[this.lunarMonth];
+            else
+            {
+                this.LunarStrMonth = LunarData.lunarMonthStrInfo[this.lunarMonth];
+            }
         }
 
         private void LunarDayToStr()

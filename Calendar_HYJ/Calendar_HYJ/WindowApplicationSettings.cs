@@ -5,7 +5,13 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Configuration;
 using System.Windows;
-
+/*
+ * ******************
+ * 创建日期：2018/10/8
+ * 创建人：HYJ
+ * 文件描述：Config数据存储帮助类
+ * ******************
+ */
 namespace Calendar_HYJ
 {
     /// <summary>
