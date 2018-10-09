@@ -184,5 +184,6 @@ namespace Calendar_HYJ
             wpMainRegion.Children.Clear();
             SetDayMainRegion();
         }
+        
     }
 }

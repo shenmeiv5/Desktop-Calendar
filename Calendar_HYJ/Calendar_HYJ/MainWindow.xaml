@@ -12,7 +12,8 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Calendar_HYJ"
         mc:Ignorable="d"
-        Title="Calendar" Height="560" Width="350" ResizeMode="NoResize">
+        Title="Calendar" Height="560" Width="350" ResizeMode="NoResize"
+        >
     <Grid>
         <!--主网格-->
         <Grid.RowDefinitions>
