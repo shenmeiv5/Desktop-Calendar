@@ -164,13 +164,13 @@ namespace Calendar_HYJ
             if (this.toolFlag == true)
             {
                 wpMainRegion.Children.Clear();
-                //cd.SelStrMonth = "";
+                cd.SelStrMonth = "";
                 SetMonthMainregion();
             }
             else
             {
                 wpMainRegion.Children.Clear();
-                //cd.SelMonthToStr();
+                cd.SelMonthToStr();
                 SetDayMainRegion();
             }
         }
@@ -190,6 +190,14 @@ namespace Calendar_HYJ
         private void Window_Deactivated(object sender, EventArgs e)
         {
             this.Close();
+        }
+
+        private void btNowDay_Click(object sender, RoutedEventArgs e)
+        {
+            this.cd.SelYear = this.cd.NowDay.SolarYear;
+            this.cd.SelMonth = this.cd.NowDay.SolarMonth;
+            wpMainRegion.Children.Clear();
+            SetDayMainRegion();
         }
     }
 }

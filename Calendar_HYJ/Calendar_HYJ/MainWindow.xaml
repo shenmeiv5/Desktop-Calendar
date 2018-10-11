@@ -32,7 +32,7 @@
             <ColumnDefinition/>
         </Grid.ColumnDefinitions>
         <!--当前日期栏-->
-        <Button x:Name="btDay" Grid.Row="1" Grid.Column="1" Style="{StaticResource NowDay_ButtonTemplate}"/>
+        <Button x:Name="btDay" Grid.Row="1" Grid.Column="1" Style="{StaticResource NowDay_ButtonTemplate}" Click="btNowDay_Click"/>
         <!--日期工具栏-->
         <Grid x:Name="gdToolRegion" Grid.Row="2" Grid.Column="1">
             <Grid.ColumnDefinitions>
